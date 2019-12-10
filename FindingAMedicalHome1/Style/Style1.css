@@ -1,0 +1,33 @@
+﻿
+
+.vertical-menu {
+    width: 200px; 
+}
+
+.vertical-menu a {
+        background-color: #ffffff; /* White background */
+        color: #bfbfbf; /* Grey text */
+        display: block; /* Make the links appear below each other */
+        padding: 12px; /* Add some padding */
+        text-decoration: none; /* To remove underline from the links */
+    }
+
+.vertical-menu a:hover {
+            color: #cc0000; /* Red text on mouse-over */
+        }
+
+.vertical-menu a.active {
+            color: #cc0000; /* Red text for active link */
+        }
+
+.linkButton {
+    display: block;
+    color: #000;
+    height: 25px;
+    font-weight: bold;
+    background: #f1f1f1;
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #e1e1e2;
+    border-radius: 5px;
+}
