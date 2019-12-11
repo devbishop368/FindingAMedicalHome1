@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using MySql.Data.MySqlClient;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -29,6 +31,21 @@ namespace FindingAMedicalHome1.Controllers
                 return View();
             }
 
+            public ActionResult AdminLogin()
+            {
+               
+
+            //Connection to database (Login credentials retrieval at a later date)
+             
+            return View(); 
+
+            }
+
+        public ActionResult Logout()
+        {
+            ViewBag.Message = "Logout";
+            return View();
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
             public IActionResult Error()

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using MySql.Data.MySqlClient;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -39,9 +41,10 @@ namespace FindingAMedicalHome1.Controllers
             return View();
         }
 
-        public ActionResult Logout()
+
+        public ActionResult ClinicAdded()
         {
-            ViewBag.Message = "Logout";
+            ViewBag.Message = "Clinic added";
             return View();
         }
 
