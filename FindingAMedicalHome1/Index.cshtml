@@ -1,0 +1,74 @@
+﻿@*@{
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }*@
+@model FindingAMedicalHome1.Services.LoginViewModel
+
+@{
+    ViewBag.Title = "Admin Login";
+}
+
+<center><h2>Admin Login</h2></center>
+
+<p><br /></p>
+<p class="">Enter your username and password to login.</p>
+<p><br /></p>
+
+<div class="row">
+    <div class="col-md-12">
+        <form method="post" OnSubmit="OperateOnDatabase(userName, Password)">
+            @*<div asp-validation-summary="All" class="text-danger">
+        <div class="form-group">
+            <label asp-for="userName"></label>
+            <input asp-for="userName" class="form-control" />
+            <span asp-validation-for="userName" class="text-danger"></span>
+
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Password"></label>
+            <input asp-for="Password" class="form-control"/>
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+
+        </div>
+            *@
+            <label><strong><p class="">Username:</p></strong> <input type='text' name='userName' required></label><br /><br />
+            <label><strong><p class="">Password:</p></strong> <input type='password' name='Password' required></label><br /><br />
+            <input type="submit" value="Login" class="btn btn-primary" />&nbsp;&nbsp;<button type='reset' class="btn btn-primary" value='Clear'>Clear</button>
+        </form>
+    </div>
+</div>
+@*<form method='post'>
+    <label><strong><p class="">Username:</p></strong> <input type='text' name='username' required></label><br /><br />
+    <label><strong><p class="">Password:</p></strong> <input type='password' name='password' required></label><br /><br />
+    <input type="submit" value="Login" class="btn btn-primary" />&nbsp;&nbsp;<button type='reset' class="btn btn-primary" value='Clear'>Clear</button>
+    <p><br /></p><p><br /></p>
+
+</form>
+<br /><br /> *@
+@* <script>
+      function Validate() {
+        $.ajax(
+        {
+          type: "POST",
+          url: '@Url.Action("Validate", "Account")',
+          data: {
+            username: $('#username').val(),
+            password: $('#password').val()
+          },
+          error: function (result) {
+            alert("There is a problem, try again");
+          },
+          success: function (result) {
+            console.log(result);
+            if (result.status == true) {
+              window.location.href = '@Url.Action("Index", "Home")';
+            }
+            else {
+              alert(result.message);
+            }
+          }
+        });
+      }
+</script> *@
+@*"window.location.href ='@Url.Action("AdminOptions", "Home")';"*@
