@@ -1,54 +1,51 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
+using FindingAMedicalHome1.Models;
 
-namespace FindingAMedicalHome1.Models /* change to "services" once moved */
+
+
+namespace FindingAMedicalHome1.Services
 {
-    // 1. Models namespace/folder should be strict models (no business logic)
-    // 2. Separate out business logic here, fine for first implementation to be behind a controller, but build with the plan to put in a separate class (only Gets & Setters in this file )
-    // 3. Look at Cookie Based authentication app.UseCookieAuthentication() (Think of PHP login sessions! THis does that!)
-    // 4. Signout/Logout  OwinAuthenticationManager.SignOut() { ??? does this work here? } /Logout()
-    public class Credentials
+    public class LoginViewModel
     {
-        //public string ID { get; set; }
-
-        
-        public string userName { get; set; }
-        public string Password { get; set; }
-
         /*NEW CODE
-         * 
-         * Look up credentials by username
-         * 
-         * No match = invalid;
-         * "Could not login"
-         * else( (success)
-         * Match for username -> check for password/compare passwords (compare Hashed values, actually)
-         * if (match)
-         * (success)
-         * else
-         * { No go son }
-         * end         * 
-         * 
-         
-             */
+        * 
+        * Look up credentials by username
+        * 
+        * No match = invalid;
+        * "Could not login"
+        * else( (success)
+        * Match for username -> check for password/compare passwords (compare Hashed values, actually)
+        * if (match)
+        * (success)
+        * else
+        * { No go son }
+        * end         * 
+        * 
+
+            */
         /* NOTES FROM MEETING
          *
          *Databases{ Must be indexed! Must create new idAdminUser table to make Auto-Incrementing! }
 
 
         */
+        
+            /* Create a Credentials object to use userName to search - Karthik*/
 
         public void OperateOnDatabase(string userName, string password)
         {
+            //Credentials User = new Credentials();
+            //User.userName = UserName;
+
             using (var sqlConnection = new MySqlConnection(""))
             {
                 var sqlCommand = sqlConnection.CreateCommand();
                 sqlCommand.CommandType = System.Data.CommandType.Text;
-                sqlCommand.CommandText = "SELECT * FROM AdminUser WHERE UserName = @userName";
+                sqlCommand.CommandText = "SELECT * FROM AdminUser WHERE AdminUserName = @userName"; //Look up credentials by username
                 sqlCommand.Parameters.Add("@userName", MySqlDbType.VarChar).Value = userName;
 
                 sqlConnection.Open();
@@ -57,19 +54,25 @@ namespace FindingAMedicalHome1.Models /* change to "services" once moved */
                 {
                     while (sqlReader.Read())
                     {
+                        if(@password == sqlReader.GetValue(2).ToString()/*Password*/) { /* LEFT OFF HERE */
+                            /* Login Success!*/
+                            //System.Windows.Forms.MessageBox.Show("Login Successful");
 
+                            
+                        }
+                        else { /*Keep looking */ }
                     }
                 }
             }
         }
-
+        /* OR this way: */
         public void OperateOnDatabaseWithoutReader(string userName, string password)
         {
             using (var sqlConnection = new MySqlConnection(""))
             {
                 var sqlCommand = sqlConnection.CreateCommand();
                 sqlCommand.CommandType = System.Data.CommandType.Text;
-                sqlCommand.CommandText = "SELECT Password FROM AdminUser WHERE UserName = @userName";
+                sqlCommand.CommandText = "SELECT Password FROM AdminUser WHERE UserName = @userName"; //Look up credentials by username
                 sqlCommand.Parameters.Add("@userName", MySqlDbType.VarChar).Value = userName;
 
                 sqlConnection.Open();
@@ -77,8 +80,8 @@ namespace FindingAMedicalHome1.Models /* change to "services" once moved */
                 var pwd = sqlCommand.ExecuteScalar();
             }
         }
-
-        /*public string CompareCredentials(string Username, string Pass)
+    /*
+        public string CompareCredentials(string Username, string Pass)
         {
             List<Credentials> validCredentials = new List<Credentials>();
             MySqlConnection cnn;
@@ -135,8 +138,8 @@ namespace FindingAMedicalHome1.Models /* change to "services" once moved */
 
             return indicator;
 
-        }*/
-    }
+        }
+        */
+        /*test*/
 }
-
-
+}
