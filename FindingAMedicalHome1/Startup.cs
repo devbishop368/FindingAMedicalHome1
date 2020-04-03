@@ -38,7 +38,7 @@ namespace FindingAMedicalHome1
             });
 
             /*End of last edit 3/19/2020 */
-
+            
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
@@ -66,9 +66,9 @@ namespace FindingAMedicalHome1
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSession();
-            app.UseRouting();
+            //app.UseRouting(); ?
             app.UseCookiePolicy();
-            app.UseHttpContextItemsMiddleware();
+            //app.UseHttpContextItemsMiddleware(); ?
             app.UseMvc();
 
             
