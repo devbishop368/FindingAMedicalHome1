@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FindingAMedicalHome1.Models;
+using FindingAMedicalHome1.Controllers;
 
 
 
@@ -11,7 +12,7 @@ namespace FindingAMedicalHome1.Services
 {
     public class LoginViewModel
     {
-        /*NEW CODE
+        /*Notes for code setup
         * 
         * Look up credentials by username
         * 
@@ -29,17 +30,17 @@ namespace FindingAMedicalHome1.Services
             */
         /* NOTES FROM MEETING
          *
-         *Databases{ Must be indexed! Must create new idAdminUser table to make Auto-Incrementing! }
+         *Databases{ Must be indexed! Must create new idAdminUser table to make Auto-Incrementing! CHECK
+         * Database has been recreated to be indexed! }
 
 
         */
         
-            /* Create a Credentials object to use userName to search - Karthik*/
+            /* Create a Credentials object to use userName to search - Professor K
+               Is this ^ indeed the best course of action? */
 
         public void OperateOnDatabase(string userName, string password)
         {
-            //Credentials User = new Credentials();
-            //User.userName = UserName;
 
             using (var sqlConnection = new MySqlConnection(""))
             {
@@ -54,10 +55,11 @@ namespace FindingAMedicalHome1.Services
                 {
                     while (sqlReader.Read())
                     {
-                        if(@password == sqlReader.GetValue(2).ToString()/*Password*/) { /* LEFT OFF HERE */
+                        if(@password == sqlReader.GetValue(2).ToString()/*Password*/) { /*----------------------- LEFT OFF HERE -------------------------------------*/
                             /* Login Success!*/
                             //System.Windows.Forms.MessageBox.Show("Login Successful");
-
+                            //*
+                            // Where to pass (userName, password); to begin a user session?
                             
                         }
                         else { /*Keep looking */ }
@@ -80,7 +82,16 @@ namespace FindingAMedicalHome1.Services
                 var pwd = sqlCommand.ExecuteScalar();
             }
         }
-    /*
+
+
+
+
+
+
+
+
+
+    /* ---- Old Code & Notes ----
         public string CompareCredentials(string Username, string Pass)
         {
             List<Credentials> validCredentials = new List<Credentials>();

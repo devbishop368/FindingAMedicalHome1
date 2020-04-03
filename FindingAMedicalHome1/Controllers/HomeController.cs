@@ -11,48 +11,13 @@ using FindingAMedicalHome1.Models;
 namespace FindingAMedicalHome1.Controllers
 {
     public class HomeController : Controller
-    {
+    {       
             public ActionResult Index()
             {
                 return View();
             }
 
-        /*[HttpGet]
-        public ActionResult Index() 
-        {
-            return View(); 
-
-        }*/
-
-        /* Example code:
-         * public class AccountController : Controller
-          {
-
-              public IActionResult Login()
-              {
-                  return View();
-              }
-              public ActionResult Validate(Credentials admin)
-              {
-                  var _admin = db.Credentials.Where(s => s.Username == admin.UserName);
-                  if (_admin.Any())
-                  {
-                      if (_admin.Where(s => s.Password == admin.Password).Any())
-                      {
-
-                          return Json(new { status = true, message = "Login Successfull!" });
-                      }
-                      else
-                      {
-                          return Json(new { status = false, message = "Invalid Password" });
-                      }
-                  }
-                  else
-                  {
-                      return Json(new { status = false, message = "Invalid Username" });
-                  }
-              }
-          } */
+        
 
         /* 
         [HttpGet]
@@ -62,7 +27,7 @@ namespace FindingAMedicalHome1.Controllers
         } Need this function? */
 
         [HttpPost]
-        public ActionResult Index(Credentials UserName, Credentials Password) //left off here
+        public ActionResult Index(Credentials UserName, Credentials Password) 
         {
         String Uname = UserName.ToString();
         String Upass = Password.ToString();

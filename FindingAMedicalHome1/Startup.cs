@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 
+
 namespace FindingAMedicalHome1
 {
     public class Startup
@@ -28,6 +29,7 @@ namespace FindingAMedicalHome1
             /*Last Edit on 3/19/2020 */
             services.AddDistributedMemoryCache();
 
+            
             services.AddSession(options =>
             {
                 options.IdleTimeout = TimeSpan.FromSeconds(10);
@@ -63,8 +65,15 @@ namespace FindingAMedicalHome1
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseSession();
+            app.UseRouting();
             app.UseCookiePolicy();
+            app.UseHttpContextItemsMiddleware();
+            app.UseMvc();
 
+            
+            
+            
             /*Last Edit on 3/19/2020 
             app.UseHttpContextItemsMiddleware();
 
@@ -88,6 +97,8 @@ namespace FindingAMedicalHome1
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
         }
+        
     }
 }
