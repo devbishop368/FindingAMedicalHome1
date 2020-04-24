@@ -1,12 +1,13 @@
-﻿using System;
+﻿using FindingAMedicalHome1.Models;
+using FindingAMedicalHome1.Services;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Diagnostics;
-using MySql.Data.MySqlClient;
-using System.Data.SqlClient;
-using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using FindingAMedicalHome1.Models;
+
 
 namespace FindingAMedicalHome1.Controllers
 {
@@ -17,40 +18,63 @@ namespace FindingAMedicalHome1.Controllers
                 return View();
             }
 
-        
-
-        /* 
-        [HttpGet]
-        public IActionResult Login()
-        {
-            return View();
-        } Need this function? */
-
-        [HttpPost]
-        public ActionResult Index(Credentials UserName, Credentials Password) 
-        {
-        String Uname = UserName.ToString();
-        String Upass = Password.ToString();
-        String result = "";
-       // Credentials cred = new Credentials();
-        
-
-        //String result = Credentials.CompareCredentials(Uname, Upass);
-        if (result != "Login Successful")
-        {
-            //Login failed
-        }
-        else
-        {
-            //Login success
-
-        }
-
-            return View();
-        //return RedirectToAction();
-        }
-
        
+        [HttpPost]
+        public async Task<IActionResult> Index(LoginModel loginModel)
+        {
+            if (loginModel == null || !ModelState.IsValid)
+            {
+                // some form of validation here, no username or password was provided
+                // front end should have validation too
+                //this statement protects from the event that someone makes a web request without your ui
+            }
+
+            var isAuthenticated = await AuthenticationManager.AuthenticateUser(loginModel.Username, loginModel.Password);
+
+            if (!isAuthenticated)
+            {
+                // authentication failed; user cannot be validated and therefore will not be logged in
+            }
+            else
+            {
+                
+                var claims = new List<Claim>
+                {
+                    // nameidentifier is a unique ID which identifies the user. This is the User ID from the database
+                    new Claim(ClaimTypes.NameIdentifier, "12345"), 
+
+                    // email 
+                    new Claim(ClaimTypes.Email, "auser@adomain.com"), 
+
+                    // these are customizable but can be used with Authorize attribute 
+                    
+                    new Claim(ClaimTypes.Role, "Admin")
+                };
+
+                // creates an identity
+                var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+                
+                var authProperties = new AuthenticationProperties
+                {
+                    AllowRefresh = true,
+                    RedirectUri = "/adminoptions/index"
+                };
+
+                // sign the user in, create a cookie that will be sent back over to the client
+                // the cookie will then be sent back to the server on every request to validate them
+                await HttpContext.SignInAsync(
+                  CookieAuthenticationDefaults.AuthenticationScheme,
+                  new ClaimsPrincipal(claimsIdentity),
+                  authProperties
+                );
+            }
+
+            return View();
+        }
+
+
+
         public ActionResult FindClinics()
             {
                 ViewBag.Message = "Find Clinics page.";

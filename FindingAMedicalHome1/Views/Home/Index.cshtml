@@ -1,7 +1,7 @@
 ﻿@*@{
         Layout = "~/Views/Shared/_Layout.cshtml";
     }*@
-@model FindingAMedicalHome1.Services.LoginViewModel
+@model FindingAMedicalHome1.Models.LoginModel
 
 @{
     ViewBag.Title = "Admin Login";
@@ -20,22 +20,7 @@
                 <p id="profile-name" class="profile-name-card"></p>
                 <p style="color:red" >@ViewBag.Error</p>
         <form method="post" OnSubmit="OperateOnDatabase(userName, Password)">
-            @*<div asp-validation-summary="All" class="text-danger">
-        <div class="form-group">
-            <label asp-for="userName"></label>
-            <input asp-for="userName" class="form-control" />
-            <span asp-validation-for="userName" class="text-danger"></span>
-
-        </div>
-
-        <div class="form-group">
-            <label asp-for="Password"></label>
-            <input asp-for="Password" class="form-control"/>
-            <span asp-validation-for="Password" class="text-danger"></span>
-        </div>
-
-        </div>
-            *@
+          
             <label><strong><p class="">Username:</p></strong> <input type='text' name='userName' required></label><br /><br />
             <label><strong><p class="">Password:</p></strong> <input type='password' name='Password' required></label><br /><br />
             <input type="submit" value="Login" class="btn btn-primary" />&nbsp;&nbsp;<button type='reset' class="btn btn-primary" value='Clear'>Clear</button>
@@ -44,14 +29,7 @@
         </div>
     </div>
 </div>
-@*<form method='post'>
-    <label><strong><p class="">Username:</p></strong> <input type='text' name='username' required></label><br /><br />
-    <label><strong><p class="">Password:</p></strong> <input type='password' name='password' required></label><br /><br />
-    <input type="submit" value="Login" class="btn btn-primary" />&nbsp;&nbsp;<button type='reset' class="btn btn-primary" value='Clear'>Clear</button>
-    <p><br /></p><p><br /></p>
 
-</form>
-<br /><br /> *@
 @* <script>
       function Validate() {
         $.ajax(

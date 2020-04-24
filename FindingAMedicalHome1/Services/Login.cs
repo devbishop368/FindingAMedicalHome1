@@ -12,6 +12,16 @@ namespace FindingAMedicalHome1.Services
 {
     public class LoginViewModel
     {
+        
+        
+        
+        /* This file is NO LONGER in use! It is being kept for notes ONLY and not for program use. */
+        
+        
+        
+        
+        
+        
         /*Notes for code setup
         * 
         * Look up credentials by username
@@ -38,11 +48,11 @@ namespace FindingAMedicalHome1.Services
         
             /* Create a Credentials object to use userName to search - Professor K
                Is this ^ indeed the best course of action? */
-
+/*
         public void OperateOnDatabase(string userName, string password)
         {
 
-            using (var sqlConnection = new MySqlConnection(""))
+            using (var sqlConnection = new MySqlConnection("Server = clinicsystemdb.cfkpw0ap0abf.us - east - 1.rds.amazonaws.com; user id = Lotusep5ep; Pwd = Pat123forsell; database = ClinicSysDB"))
             {
                 var sqlCommand = sqlConnection.CreateCommand();
                 sqlCommand.CommandType = System.Data.CommandType.Text;
@@ -55,21 +65,22 @@ namespace FindingAMedicalHome1.Services
                 {
                     while (sqlReader.Read())
                     {
-                        if(@password == sqlReader.GetValue(2).ToString()/*Password*/) { /*----------------------- LEFT OFF HERE -------------------------------------*/
+                        if(@password == sqlReader.GetValue(2).ToString()/*Password*/ /*) { /*----------------------- LEFT OFF HERE -------------------------------------*/
                             /* Login Success!*/
                             //System.Windows.Forms.MessageBox.Show("Login Successful");
                             //*
-                            // Where to pass (userName, password); to begin a user session?
+                            // Where to pass (userName, password) to begin a user session?
+                            
 
                             
-                        }
-                        else { /*Keep looking */ }
-                    }
+                        /*}
+                        else { /*Keep looking */ //}
+                    /*}
                 }
             }
         }
         /* OR this way: */
-        public void OperateOnDatabaseWithoutReader(string userName, string password)
+       /* public void OperateOnDatabaseWithoutReader(string userName, string password)
         {
             using (var sqlConnection = new MySqlConnection(""))
             {
@@ -82,7 +93,7 @@ namespace FindingAMedicalHome1.Services
 
                 var pwd = sqlCommand.ExecuteScalar();
             }
-        }
+        }*/
 
 
 
@@ -153,5 +164,5 @@ namespace FindingAMedicalHome1.Services
         }
         */
         /*test*/
-}
+    }
 }

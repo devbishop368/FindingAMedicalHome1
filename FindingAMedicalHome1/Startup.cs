@@ -29,12 +29,15 @@ namespace FindingAMedicalHome1
             /*Last Edit on 3/19/2020 */
             services.AddDistributedMemoryCache();
 
-            
+           
+
+
             services.AddSession(options =>
             {
                 options.IdleTimeout = TimeSpan.FromSeconds(10);
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
+             
             });
 
             /*End of last edit 3/19/2020 */
@@ -68,6 +71,7 @@ namespace FindingAMedicalHome1
             app.UseSession();
             //app.UseRouting(); ?
             app.UseCookiePolicy();
+            //app.UseAuthentication();
             //app.UseHttpContextItemsMiddleware(); ?
             app.UseMvc();
 
@@ -77,10 +81,10 @@ namespace FindingAMedicalHome1
             /*Last Edit on 3/19/2020 
             app.UseHttpContextItemsMiddleware();
 
-            app.UseRouting();
+            app.UseRouting(); */
 
-            app.UseAuthentication();
-            app.UseAuthorization();
+            
+            /* app.UseAuthorization();
 
             app.UseSession();
 
